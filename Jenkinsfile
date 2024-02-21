@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("Checkout") {
             steps {
-                git branch: 'master', 
+                git branch: '*/master', 
                 url: 'https://github.com/vinaypro5/Business_Management_Project.git'
             }
         }
@@ -21,3 +21,7 @@ pipeline {
         stage("Package") {
             steps {
                 bat "mvn package"
+            }
+        }
+    }
+}
