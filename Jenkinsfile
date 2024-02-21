@@ -1,36 +1,23 @@
 pipeline {
-    agent any
-
-    tools {
-        maven "M3"
-    }
+    agent any 
 
     stages {
-        stage('Checkout') {
+        stage("Checkout") {
             steps {
-                // Checkout the repository
-                git 'https://github.com/vinaypro5/Business_Management_Project.git'
+                git branch: 'master', 
+                url: 'https://github.com/vinaypro5/Business_Management_Project.git'
             }
         }
-
-        stage('Build') {
+        stage("Build") {
             steps {
-                // Build your project using Maven
-                bat 'mvn clean test -e -X'
-
+                bat "mvn clean install"
             }
         }
-
-        // Add more stages as needed (e.g., test, deploy)
-    }
-
-    post {
-        success {
-            echo 'Pipeline succeeded! Add additional success actions here if needed.'
+        stage("Test") {
+            steps {
+                bat "mvn test"
+            }
         }
-        failure {
-            echo 'Pipeline failed! Add additional failure actions here if needed.'
-        }
-    }
-}
-
+        stage("Package") {
+            steps {
+                bat "mvn package"
