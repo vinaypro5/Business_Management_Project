@@ -4,8 +4,7 @@ pipeline {
     stages {
         stage("Checkout") {
             steps {
-                git branch: '*/master', 
-                url: 'https://github.com/vinaypro5/Business_Management_Project.git'
+                git url: 'https://github.com/vinaypro5/Business_Management_Project.git'
             }
         }
         stage("Build") {
